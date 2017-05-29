@@ -4,3 +4,98 @@ use setTimeout(function()) {
 	
 }
 to make a timer for the questions
+
+To do:
+
+Q&A
+- Present Questions
+	- Go to new page?
+	- Use jquery to make changes on screen?
+- Answer Questions
+	- on click for answers? (hard)
+		- Go to new page or use jquery to load elements?
+	- radio buttons for answers (easy)
+
+Store questions and answers and correct/incorrect
+- Use objects?
+
+Score
+- Keepy track of right and wrong answers
+- Use jquery to display at the end
+
+Timer
+- Start time on load of each question
+- Cases or if/else for 
+	- timeout
+- Reset the timer for each question
+- See interval.html for info on how to make this happen
+- Silent, Hidden timer for result after user answers before moving to next question
+
+Should we put timer and right/wrong together?
+	-Example
+	- Timer > 0 and incorrect
+	- Timer > 0 and correct
+	- Timer = 0
+
+Reset function
+- Takes user back to beginning question
+
+
+Q&A Ideas
+- array of questions and answers
+	- see 10-Question Game
+		- Array of question objects and answers but only for T/F
+		- Could we make an object of multiple choice answers to go with a question and mark which is A,B,C,D and also correct/incorrect
+			- Use A,B,C,D to place the questions on the html and correct/incorrect for the computer to know where to direct the user to after an answer choice?
+
+			var Q1 {
+			text: What is the airspeed velocity of an unladen swallow?
+			A: Shfifty-five, False
+			B: potato, False
+			C: 21, False
+			D: Norwegian Blue, True
+			}
+
+			Maybe after making all the Q's we can put them in an array?
+			Maybe we can make it all one big object where each Q is an object within a bigger game object and all we have to do is call something like Game.Q1.Text or Game.Q1.A?
+			I need to look at classes and ojects so I can find out how to get the computer to listen for each item and place it accordingly or react to it's true/false value.
+
+			First Idea
+
+			var Q1 = {
+				Question: 'What is the airspeed velocity of an unladen swallow?';
+				A: ['Shfifty-five', False];
+				B: ['potato', False];
+				C: ['21', False];
+				D: ['Norwegian Blue', True];
+			}
+
+			Second Idea
+
+			var qBank = {
+				Q1: {
+					Question: 'What is the airspeed velocity of an unladen swallow?',
+					A: ['Shfifty-five', false],
+					B: ['potato', false],
+					C: ['21', false],
+					D: ['Norwegian Blue', true]
+					}
+			}
+- Should probably include an "answer" entry in the object to be pulled from rather than have to search for it in the object again
+
+Steps
+- Opening Page
+	-Heading
+	-Button to start
+- On click of start button
+	- run pageSetup
+	- jquery in the question and the answer choices
+	- jquery in the CSS for the answer choices?  Add a class to them that is defined in the CSS?
+	- start countDown timer
+		- have condition for what to do if time runs out?
+	- function for evaluating correct click, incorrect click, and time runs out.
+		- All will clear out the divs and classes and replace with the Answer in the correct div
+		- Different message will appear based on incorrect / correct / or timeout
+		- Is on button clickl an option and how to I get it to apply to all buttons?
+			- Maybe add a class to the button that they all share?
+			-$(":button")

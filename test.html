@@ -1,13 +1,11 @@
-$(document).ready(function() {	
-//Variables
-var correctAnswers = 0;
-var incorrectAnswers = 0;
-var unansweredQuestions = 0;
-var questionCounter = 1; //Way to iterate through questions?
-var questionTimer = 30; //Timer for each question
-var intervalId; //Will become interval length for Question counter
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trivia Game</title>
+</head>
+<body>
 
-//Bank of Questions and Answers as an Object
+<script type="text/javascript">
 	var qBank = {
 		Q1: {
 			Question: 'What is the airspeed velocity of an unladen swallow?',
@@ -18,7 +16,7 @@ var intervalId; //Will become interval length for Question counter
 			},
 
 		Q2: {
-			Question: 'What is the answer to life the universe and everything?',
+			Question: 'What is the airspeed velocity of an unladen swallow?',
 			A: ['Shfifty-five', false],
 			B: ['potato', false],
 			C: ['21', false],
@@ -88,59 +86,22 @@ var intervalId; //Will become interval length for Question counter
 			C: ['21', false],
 			D: ['Norwegian Blue', true]
 			}
-	
-
-
-
 	}
 
-//Functions
 
-	//Set up question page
-	function pageSetup() {
-		$("#qSpace").html(qBank.Q1.Question);
-		$(".aSpace").html(qBank.Q1.A[0]);
-		$(".bSpace").html(qBank.Q1.B[0]);
-		$(".cSpace").html(qBank.Q1.C[0]);
-		$(".dSpace").html(qBank.Q1.D[0]);
-	}
-pageSetup();
-	// interval to countdown 
-	function finalCountdown() {
-		intervalId = setInterval(qCountdown, 1000);
+	console.log(qBank.Q1.D[0]);
+
+	/*	var Q1 = {
+	Question: 'What is the airspeed velocity of an unladen swallow?',
+	A: ['Shfifty-five', false],
+	B: ['potato', false],
+	C: ['21', false],
+	D: ['Norwegian Blue', true]
 	}
 
-	function qCountdown() {
-		questionTimer--;
-		$("#countDown").html("<h2>" + questionTimer + "</h2>");
-		if (questionTimer == 0) {
-			timeOut();
-
-		} else if (/*Some way of registering that the button pressed is correct*/) {
-		} else if (/*Some way of registering that the button pressed is correct*/) {
-
-		}
-	}
-	//Function to clear out the Questions and Answers and present the Correct Answer if
-	// the timer runs out
-	function timeOut() {
-		clearInterval(intervalId);
-		$(".gameBox").empty();
-		$(".answerSpace").html("<h2>Correct Answer<h2>")
-	}
-
-	function correctA() {
-		clearInterval(intervalId);
-		$(".gameBox").empty();
-		$(".answerSpace").html("<h2>Correct Answer<h2>")
-	}
-
-	function incorrectA(){
-		clearInterval(intervalId);
-		$(".gameBox").empty();
-		$(".answerSpace").html("<h2>Correct Answer<h2>")
-	}
-//Run this thing
-	console.log(qBank.Q1.Question);
-	finalCountdown();
-});
+	var qBank = [Q1];
+	console.log(Q1.D[0]);
+	console.log(qBank[How do I get the value ot D[0] when pulling Q1?]);*/
+</script>
+</body>
+</html>
