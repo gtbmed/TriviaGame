@@ -1,8 +1,9 @@
-$(document).ready(function() {	
+$(document).ready(function() {
 //opening setup
 	$(".page-header").html("Nonsense Opinion Or Baseless Trivia");
 	$("#getStarted").html("Get Started");
-	$( ".gameBox" ).hide(); //Hide the buttons and questions at first
+	$(".gameBox").hide(); //Hide the buttons and questions at first
+	$(".newGame").hide();
 
 $("#getStarted").click(function() {
 	$( ".page-header" ).hide(); //Hide the opening setup
@@ -106,6 +107,9 @@ var intervalId_2; //Will become interval length for silent timer when answer is 
 // Have an on button click of the start button, begin running the whole game.  Maybe have it run pageSetup
 	//Set up question page
 	function pageSetup() {
+		$(".answerSpace").hide();
+		$(".newGame").hide();
+		finalCountdown();
 		$("#qSpace").html(qBank[questionCounter].Question);
 		$(".aSpace").html(qBank[questionCounter].A[0]);
 		$(".bSpace").html(qBank[questionCounter].B[0]);
@@ -114,12 +118,11 @@ var intervalId_2; //Will become interval length for silent timer when answer is 
 		// Now for the correct/incorrect (boolean) to be added in. Need a way to access the question index that can be incremented
 		$("#answerButtonA").attr("data-value", qBank[questionCounter].A[1]);
 		$("#answerButtonB").attr("data-value", qBank[questionCounter].B[1]);
-		var z = $("#answerButtonC").attr("data-value", qBank[questionCounter].C[1]);
+		$("#answerButtonC").attr("data-value", qBank[questionCounter].C[1]);
 		$("#answerButtonD").attr("data-value", qBank[questionCounter].D[1]);
-		console.log(z);
 		answerTimer = 10; //Reset the silent timer because for every new question there is a new answer
 	}
-	pageSetup(); //TESTING
+	pageSetup(); // To set up the first question
 	// interval to countdown...also a reference to a Europe song that needs to be used in more weddings
 	function finalCountdown() {
 		intervalId = setInterval(qCountdown, 1000);
@@ -128,22 +131,22 @@ var intervalId_2; //Will become interval length for silent timer when answer is 
 	function qCountdown() {
 		questionTimer--;
 		$("#countDown").html("<h2>" + questionTimer + "</h2>");
-		if (questionTimer == 0 && questionCounter + 1 != qBank.length) { //Probably need to and && and then != to evaluate if the end has occurred
+		if (questionTimer == 0 && questionCounter + 1 != qBank.length) {
 			timeOut();
-		// else if (questionTimer == 0 && questionIndex + 1 = qBank.length) {
-			//unansweredQuestions++
-			//}
-		// run final screen
-		}
+		} else if (questionTimer == 0 && questionCounter + 1 == qBank.length) {  //Goes to final screen if this is the last question
+			unansweredQuestions++;
+			finalScreen();
+			}
 	}
+
 	function silentCountdown() {
 		intervalId_2 = setInterval(silentTimer, 1000);
-		questionTimer = 30;
 	}
 	function silentTimer() {
 		answerTimer--;
 		if (answerTimer == 0) {
 			pageSetup();
+			clearInterval(intervalId_2);
 		}
 	}
 	//Function to clear out the Questions and Answers and present the Correct Answer if
@@ -152,66 +155,79 @@ var intervalId_2; //Will become interval length for silent timer when answer is 
 		clearInterval(intervalId);
 		//$(".gameBox").empty();
 		$(".answerSpace").html("C'mon man! The correct answer is: " + qBank[questionCounter].Answer);
+		$(".answerSpace").show();
 		unansweredQuestions++;
-		console.log(unansweredQuestions);
 		questionCounter++;
-		console.log(questionCounter);
 		silentCountdown();
+		questionTimer = 30;
 	}
 
 	function correctA() {
 		clearInterval(intervalId);
-		$(".gameBox").empty();
 		$(".answerSpace").html("Giggity goo, you got it right.  The correct answer is: " + qBank[questionCounter].Answer);
+		$(".answerSpace").show();
 		correctAnswers++;
 		questionCounter++;
 		silentCountdown();
+		questionTimer = 30;
 	}
 
 	function incorrectA() {
 		clearInterval(intervalId);
-		$(".gameBox").empty();
 		$(".answerSpace").html("BBBRWROOONG! The pricess is in another house. The correct answer is: " + qBank[questionCounter].Answer);
+		$(".answerSpace").show();
 		incorrectAnswers++;
 		questionCounter++;
 		silentCountdown();
+		questionTimer = 30;
 	}
 
 	//function resetQTimer() {
 	//	questionTimer = 30; //Timer for each question
 	//}
 
-	function resetATimer() {
-		answerTimer = 10; //Timer for the answer
-	}
+	//function resetATimer() {
+	//	answerTimer = 10; //Timer for the answer
+	//}
 
 	//Function for correct incorrect
-	// $(".buttonZ").click() {}
-	function answerEval() {
-
+	$(".buttonZ").click(function() {
 		var potato = $(this).attr("data-value");
-	//if  questionIndex + 1 = qBank.length -> run finalScreen
-	//	else begin silent timer & run the following if-else
-	// 
-	// if potato === "true"
-		//correctA();
-	// else
-		//incorrectA();
-	// if silent timer == 0;
-	}
+			if (potato === "true") {
+				correctA();
+			} else if (potato === "true" && questionCounter + 1 == qBank.length) { //captures last answer before finalScrene
+				correctAnswers++;
+				finalScreen();
+			} else if (potato === "false" && questionCounter + 1 == qBank.length){//captures last answer before finalScrene
+				incorrectAnswers++;
+				finalScreen();
+			} else {
+				incorrectA();
+			}
+	});
 
 	function finalScreen() {
-		//$().html("Correct Answers: " + correctAnswers)
-		//$().html("Incorrect Answers: " + incorrectAnswers)
-		//$().html("Unanswered Questions: " + unansweredQuestions)
-		// button to restart the game -> runs function newGame
+		clearInterval(intervalId);
+		clearInterval(intervalId_2);
+		$(".gameBox").hide();
+		$(".newGame").show();
+		$(".tryAgain").show();
+		$(".gotIt").html("Correct Answers: " + correctAnswers)
+		$(".notIt").html("Incorrect Answers: " + incorrectAnswers)
+		$(".noTry").html("Unanswered Questions: " + unansweredQuestions)
 	}
-	function newGame() {
-		// sets variables back to their original values
-		//setting questionCounter back to 0 and running pageSetup will start the first question up again
-	}
-//Run this thing
-	console.log(qBank[questionCounter].Question);
-	finalCountdown();
-})
+
+	$("#tryAgain").click(function() {
+		correctAnswers = 0;
+		incorrectAnswers = 0;
+		unansweredQuestions = 0;
+		questionCounter = 0;
+		questionTimer = 30;
+		pageSetup();
+		$(".gameBox").show();
+		$(".gotIt").hide();
+		$(".notIt").hide();
+		$(".noTry").hide();
+	});
+});
 });
