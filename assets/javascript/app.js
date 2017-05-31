@@ -109,6 +109,7 @@ var intervalId_2; //Will become interval length for silent timer when answer is 
 	function pageSetup() {
 		$(".answerSpace").hide();
 		$(".newGame").hide();
+		$( ".gameBox" ).show();
 		finalCountdown();
 		$("#qSpace").html(qBank[questionCounter].Question);
 		$(".aSpace").html(qBank[questionCounter].A[0]);
@@ -153,7 +154,7 @@ var intervalId_2; //Will become interval length for silent timer when answer is 
 	// the timer runs out
 	function timeOut() {
 		clearInterval(intervalId);
-		//$(".gameBox").empty();
+		$(".gameBox").hide();
 		$(".answerSpace").html("C'mon man! The correct answer is: " + qBank[questionCounter].Answer);
 		$(".answerSpace").show();
 		unansweredQuestions++;
@@ -164,6 +165,7 @@ var intervalId_2; //Will become interval length for silent timer when answer is 
 
 	function correctA() {
 		clearInterval(intervalId);
+		$(".gameBox").hide();
 		$(".answerSpace").html("Giggity goo, you got it right.  The correct answer is: " + qBank[questionCounter].Answer);
 		$(".answerSpace").show();
 		correctAnswers++;
@@ -174,6 +176,7 @@ var intervalId_2; //Will become interval length for silent timer when answer is 
 
 	function incorrectA() {
 		clearInterval(intervalId);
+		$(".gameBox").hide();
 		$(".answerSpace").html("BBBRWROOONG! The pricess is in another house. The correct answer is: " + qBank[questionCounter].Answer);
 		$(".answerSpace").show();
 		incorrectAnswers++;

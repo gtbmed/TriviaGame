@@ -1,3 +1,6 @@
-#countDown {
-
+.orbitronFont {
+	font-family: 'Orbitron', sans-serif;
+	font-size: 100px;
 }
+//*^^why won't this display*/
+/*font-family: 'Arvo', serif;*/
