@@ -84,18 +84,26 @@ Q&A Ideas
 - Should probably include an "answer" entry in the object to be pulled from rather than have to search for it in the object again
 
 Steps
-- Opening Page
+- Opening Page (on ready)
 	-Heading
 	-Button to start
-- On click of start button
+- On click of start button (on click of start button loads everything else up.  This will also happen with the reset button at the end of the game)
 	- run pageSetup
-	- jquery in the question and the answer choices
-	- jquery in the CSS for the answer choices?  Add a class to them that is defined in the CSS?
+		- jquery in the question and the answer choices
+		- jquery in the CSS for the answer choices?  Add a class to them that is defined in the CSS?
 	- start countDown timer
 		- have condition for what to do if time runs out?
 	- function for evaluating correct click, incorrect click, and time runs out.
 		- All will clear out the divs and classes and replace with the Answer in the correct div
-		- Different message will appear based on incorrect / correct / or timeout
-		- Is on button clickl an option and how to I get it to apply to all buttons?
 			- Maybe add a class to the button that they all share?
-			-$(":button")
+			-$(":button")  ???
+- On click of any answer button or time out (skip evaluate part)
+	- evaluate true/false of button
+	- empty out questions and answers
+	- Different message will appear based on incorrect / correct / or timeout 
+		- case statement to manage all of this or if else
+	- increment an index so the gameSetup function pulls the next set of questions and answers
+	- start silentTimer to show answer
+	- end of silentTimer clears out answer and runs gameSetup for next question
+- After last question answered
+	- Evaluate 

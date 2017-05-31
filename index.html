@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Trivia Game</title>
+	<title>Nonsense Opinion Or Baseless Trivia</title>
 	<!-- Bootstrap CDN -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -10,24 +10,30 @@
 
    <!-- Javascript page -->
     <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <!-- CSS Sheet -->
+    <style type="text/css" src="assets/css/style.js"></style>
 </head>
 <body>
 
 	<div class="container">
+		<div class="page-header"></div><br>
+		<button id="getStarted"></button>
 		<div class="row">
 			<div class="col-md-9 gameBox">
 				<div id="qSpace"></div>
-				<button class="aSpace"></button>
-				<button class="bSpace"></button>
-				<button class="cSpace"></button>
-				<button class="dSpace"></button>
+				<button id="answerButtonA" class="aSpace buttonZ" data-value="aValue"></button><br>
+				<button id="answerButtonB" class="bSpace buttonZ" data-value="bValue"></button><br>
+				<button id="answerButtonC" class="cSpace buttonZ" data-value="cValue"></button><br>
+				<button id="answerButtonD" class="dSpace buttonZ" data-value="Value"></button><br>
 			</div>
-			<div class="answerSpace"></div>
 			<div class="col-md-3">
 				<div id="countDown">
 					
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="answerSpace"></div>
 		</div>
 	</div>
 
